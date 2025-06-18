@@ -1,11 +1,12 @@
 # this allows us to use code from
 # the open-source pygame library
 # throughout this file
-import pygame
+import pygame, sys
 from constants import *
 from player import *
 from asteroid import *
 from asteroidfield import *
+from circleshape import *
 
 def main():
     pygame.init()
@@ -30,6 +31,11 @@ def main():
             
         screen.fill((0,0,0))
         updatable.update(dt)
+        
+        for asteroid in asteroids:
+            if (asteroid.collision(player)):
+                sys.exit("Game over!")
+                
         for image in drawable:
             image.draw(screen)
             
